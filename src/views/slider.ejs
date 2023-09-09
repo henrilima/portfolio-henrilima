@@ -1,0 +1,267 @@
+<%- include('./partials/header') %>
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        width: 100%;
+        min-height: 100vh;
+        background-color: #252525;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    main {
+        display: flex;
+        align-items: center;
+        justify-items: center;
+    }
+
+    main .box {
+        width: 4.6rem;
+        height: 300px;
+        border-radius: 2.3rem;
+        margin: 0 0.5rem;
+        transition: all 0.8s;
+        object-fit: cover;
+        background-repeat: no-repeat;
+        color: #fff;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    main .box:nth-child(1) {
+        background: center center url(/assets/wallpaper/a1.jpg);
+        background-size: auto 100%;
+        background-position: 5%;
+    }
+    main .box:nth-child(2) {
+        background: center center url(/assets/wallpaper/a2.jpg);
+        background-size: auto 100%;
+        background-position: 72%;
+    }
+    main .box:nth-child(3) {
+        background: center center url(/assets/wallpaper/a3.jpg);
+        background-size: auto 100%;
+        background-position: 72%;
+    }
+    main .box:nth-child(4) {
+        background: center center url(/assets/wallpaper/a4.jpg);
+        background-size: auto 100%;
+        background-position: 58%;
+    }
+    main .box:nth-child(5) {
+        background: center center url(/assets/wallpaper/a5.jpg);
+        background-size: auto 100%;
+        background-position: 55%;
+    }
+
+    main .box > div {
+        border-radius: 2.3rem;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            45deg,
+            rgb(18, 17, 27),
+            rgb(0, 0, 0, 0)
+        );
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+    }
+
+    .reveal-d {
+        display: block !important;
+        animation: fadeup 1s ease-in-out forwards;
+    }
+
+    main .box div .master {
+        display: none;
+        margin: 0 0 2rem 2rem;
+    }
+
+    .reveal-w {
+        width: calc(420px - 1rem) !important;
+    }
+
+    .button {
+        width: 110px;
+        border: 1px solid #12111b;
+        color: #ffffff;
+        font-weight: 400;
+        background-color: #469579;
+        margin-top: 0.6rem;
+        border-radius: 2rem;
+        padding: 0.2rem 1rem;
+    }
+
+    #unique {
+        display: none;
+    }
+
+    @keyframes fadeup {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @media screen and (max-width: 920px) {
+        main {
+            display: none;
+        }
+
+        #unique {
+            display: block;
+        }
+    }
+</style>
+
+<main>
+    <section class="box" onclick="revealBoxContent(0)">
+        <div>
+            <div class="master">
+                <h4>Howl's Moving Castle #1</h4>
+                <a
+                    href="#"
+                >
+                    <button class="button">Ver mais</button>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="box" onclick="revealBoxContent(1)">
+        <div>
+            <div class="master">
+                <h4>Howl's Moving Castle #2</h4>
+                <a
+                    href="#"
+                >
+                    <button class="button">Ver mais</button>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="box" onclick="revealBoxContent(2)">
+        <div>
+            <div class="master">
+                <h4>Howl's Moving Castle #3</h4>
+                <a
+                    href="#"
+                >
+                    <button class="button">Ver mais</button>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="box" onclick="revealBoxContent(3)">
+        <div>
+            <div class="master">
+                <h4>Howl's Moving Castle #4</h4>
+                <a
+                    href="#"
+                >
+                    <button class="button">Ver mais</button>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="box" onclick="revealBoxContent(4)">
+        <div>
+            <div class="master">
+                <h4>Howl's Moving Castle #5</h4>
+                <a href="#">
+                    <button class="button">Ver mais</button>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<p
+    id="unique"
+    style="
+        color: #fff;
+        max-width: 400px;
+        text-align: center;
+        font-weight: 800;
+        padding: 0 0.5rem;
+    "
+>
+    Esta funcionalidade não é compatível com sua tela.
+</p>
+
+<script>
+    var enableBox = false;
+    var lastID = false;
+    var time = false;
+    var eTime = false;
+    var lastTime = false;
+
+    function revealBoxContent(ID) {
+        time = new Date().getMinutes();
+
+        if (enableBox == false) {
+            document
+                .querySelectorAll(`main section.box`)
+                [ID].classList.add("reveal-w");
+            document
+                .querySelectorAll(`div.master`)
+                [ID].classList.add("reveal-d");
+            enableBox = true;
+            lastID = ID;
+            eTime = time;
+            lastTime = ++time;
+
+            setTimeout(() => {
+                eTime = ++eTime;
+            }, 7000);
+        } else {
+            document
+                .querySelectorAll(`main section.box`)
+                [lastID].classList.remove("reveal-w");
+            document
+                .querySelectorAll(`div.master`)
+                [lastID].classList.remove("reveal-d");
+            document
+                .querySelectorAll(`main section.box`)
+                [ID].classList.add("reveal-w");
+            document
+                .querySelectorAll(`div.master`)
+                [ID].classList.add("reveal-d");
+            lastID = ID;
+            eTime = time;
+            lastTime = ++time;
+            setTimeout(() => {
+                eTime = ++eTime;
+            }, 8000);
+        }
+    }
+
+    setInterval(() => {
+        if (eTime === lastTime && [0, 1, 2, 3, 4].includes(lastID)) {
+            eTime = false;
+            lastTime = false;
+            document
+                .getElementsByClassName("box")
+                [lastID].classList.remove("reveal-w");
+            document
+                .getElementsByClassName("master")
+                [lastID].classList.remove("reveal-d");
+        }
+    }, 1000);
+</script>
+</body>
+
+</html>

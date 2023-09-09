@@ -1,0 +1,75 @@
+<%- include('./partials/header') %>
+
+<main id="dashboard">
+	<div class="wrapper" id="scroller-container" data-aos="fade" data-aos-duration="800">
+		<p id="text-w">Puxe para o lado</p>
+		<div class="scroller">
+			<div class="block">
+                <div>
+					<img src="/assets/icons/chat.png" alt="chat" title="chat" draggable="false">
+				</div>
+				<div>
+					<h4>Projeto: Chat Global</h4>
+					<div>
+						<a href="/projects/global">Acessar</a>
+						<!-- <a href="#">Raw</a> -->
+					</div>
+				</div>
+            </div>
+			<div class="block">
+				<div>
+					<img src="/assets/icons/calculadora.png" alt="calculadora" title="calculadora" draggable="false">
+				</div>
+				<div>
+					<h4>Projeto: Calculadora Simples</h4>
+					<div>
+						<a href="/projects/calc">Acessar</a>
+						<!-- <a href="#">Raw</a> -->
+					</div>
+				</div>
+			</div>
+			<div class="block">
+				<div>
+					<img src="/assets/icons/jokenpo.png" alt="jokenpo" title="jokenpo" draggable="false">
+				</div>
+				<div>
+					<h4>Projeto: Jokenpô</h4>
+					<div>
+						<a href="/projects/joken">Acessar</a>
+						<!-- <a href="#">Raw</a> -->
+					</div>
+				</div>
+			</div>
+			<div class="block">
+				<div>
+					<img src="/assets/icons/slider.png" alt="slider" title="slider" draggable="false">
+				</div>
+				<div>
+					<h4>Projeto: Slider</h4>
+					<div>
+						<a href="/projects/slide">Acessar</a>
+						<!-- <a href="#">Raw</a> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="user-profile" data-aos="fade" data-aos-delay="100" data-aos-duration="1200">
+		<img src="<%- user.avatar %>" alt="Sem foto" title="Avatar do usuário">
+		<div>
+			<h3><%- user.username %></h3>
+			<p><%- user.tag %></p>
+			<a href="/">Início</a>
+			<a href="/google/logout">Sair</a>
+		</div>
+	</div>
+</main>
+
+<script src="./javascript/main.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+	AOS.init();
+</script>
+</body>
+
+</html>

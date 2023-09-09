@@ -1,0 +1,313 @@
+<%- include('./partials/header') %>
+<style>
+	@import url(https://fonts.googleapis.com/css?family=Red+Hat+Display:300,regular,500,600,700,800,900,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: "Red Hat Display", sans-serif;
+	}
+
+	body {
+		width: 100%;
+		background-color: #252525;
+		overflow-x: hidden;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	body section {
+		height: 100vh;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+
+	body section:nth-of-type(1) {
+		width: 60%;
+	}
+
+	body section:nth-of-type(2) {
+		width: 40%;
+	}
+
+	body section>span {
+		display: flex;
+		margin: 2rem;
+	}
+
+	.box {
+		margin: 1.2rem;
+		width: 100px;
+		height: 100px;
+		border-radius: 20rem;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+	}
+
+	.boxVoid {
+		background-color: rgb(217, 124, 15);
+		transition: all 0.8s;
+	}
+
+	.boxVoid img {
+		z-index: -1;
+	}
+
+	.box img {
+		width: 70px;
+		height: 70px;
+	}
+
+	.box#box1 {
+		background-color: #ff9364;
+	}
+
+	.box#box2 {
+		background-color: #aa7fc1;
+	}
+
+	.box#box3 {
+		background-color: #6f63ff;
+	}
+
+	button {
+		padding: 0.4rem 2rem;
+		font-size: 1.1rem;
+		background-color: rgba(38, 136, 38, 0.6);
+		border-radius: 8rem;
+		border: none;
+		color: #fff;
+		font-weight: 700;
+		transition: all 0.4s;
+	}
+
+	button:hover {
+		cursor: pointer;
+		background-color: rgba(38, 136, 38, 0.8);
+	}
+
+	@keyframes pulse-blue {
+		0% {
+			transform: scale(0.95);
+			box-shadow: 0 0 0 0 rgba(255, 146, 100, 0.7);
+		}
+
+		70% {
+			transform: scale(1);
+			box-shadow: 0 0 0 25px rgba(142, 68, 173, 0);
+		}
+
+		100% {
+			transform: scale(0.95);
+			box-shadow: 0 0 0 0 rgba(142, 68, 173, 0);
+		}
+	}
+
+	@keyframes pulse-yellow {
+		0% {
+			transform: scale(0.95);
+			box-shadow: 0 0 0 0 rgba(170, 127, 193, 0.7);
+		}
+
+		70% {
+			transform: scale(1);
+			box-shadow: 0 0 0 25px rgba(142, 68, 173, 0);
+		}
+
+		100% {
+			transform: scale(0.95);
+			box-shadow: 0 0 0 0 rgba(142, 68, 173, 0);
+		}
+	}
+
+	@keyframes pulse-red {
+		0% {
+			transform: scale(0.95);
+			box-shadow: 0 0 0 0 rgba(112, 99, 255, 0.7)
+		}
+
+		70% {
+			transform: scale(1);
+			box-shadow: 0 0 0 25px rgba(142, 68, 173, 0);
+		}
+
+		100% {
+			transform: scale(0.95);
+			box-shadow: 0 0 0 0 rgba(142, 68, 173, 0);
+		}
+	}
+
+	.sidebar {
+		background-color: #353535;
+	}
+
+	.sidebar h1 {
+		color: #fff;
+	}
+
+	.sidebar h3 {
+		color: rgb(163, 163, 163);
+	}
+
+	@media screen and (max-width: 1000px) {
+		body {
+			flex-direction: column;
+		}
+
+		body section {
+			height: 50vh;
+		}
+
+		body section:nth-of-type(1),
+		body section:nth-of-type(2) {
+			width: 100% !important;
+		}
+	}
+</style>
+
+<section>
+	<span>
+		<div class="box" id="box1" onclick="select(1)">
+			<img src="/assets/rock.png" alt="rock" draggable="false" />
+		</div>
+		<div class="box" id="box2" onclick="select(2)">
+			<img src="/assets/paper.png" alt="paper" draggable="false" />
+		</div>
+		<div class="box" id="box3" onclick="select(3)">
+			<img src="/assets/scissor.png" alt="scissor" draggable="false" />
+		</div>
+	</span>
+	<button type="button" id="play" onclick="start()">Jogar</button>
+</section>
+<section class="sidebar">
+	<h1>Resultado</h1>
+	<h3 id="display">User VS Bot</h3>
+	<span>
+		<div class="box boxVoid" id="userBOX">
+			<img src="" draggable="false" id="userIMG" />
+		</div>
+		<div class="box boxVoid" id="botBOX">
+			<img src="" draggable="false" id="botIMG" />
+		</div>
+	</span>
+</section>
+
+<script>
+	var result = 0;
+	var selected = 0;
+	var lastSelected = 0;
+
+	function select(uID) {
+		selected = uID;
+
+		setTimeout(() => {
+			if (lastSelected !== 0) {
+				document.getElementById(`box${lastSelected}`).style.animation =
+					"none";
+			}
+		}, 150);
+
+		setTimeout(() => {
+			if (uID === 1) {
+				document.getElementById(`box${uID}`).style.animation =
+					"pulse-blue 2s infinite";
+				document.getElementById("userIMG").src = "/assets/rock.png";
+				document.getElementById("userBOX").style.backgroundColor =
+					"#ff9364";
+				lastSelected = uID;
+			} else if (uID === 2) {
+				document.getElementById(`box${uID}`).style.animation =
+					"pulse-yellow 2s infinite";
+				document.getElementById("userIMG").src = "/assets/paper.png";
+				document.getElementById("userBOX").style.backgroundColor =
+					"#aa7fc1";
+				lastSelected = uID;
+			} else if (uID === 3) {
+				document.getElementById(`box${uID}`).style.animation =
+					"pulse-red 2s infinite";
+				document.getElementById("userIMG").src = "/assets/scissor.png";
+				document.getElementById("userBOX").style.backgroundColor =
+					"#6f63ff";
+				lastSelected = uID;
+			}
+			document.getElementById("userIMG").style.zIndex = "1";
+		}, 150);
+	}
+
+	function start() {
+		if (selected === 0) {
+			return alert("Você precisa selecionar PEDRA, PAPEL ou TESOURA!");
+		}
+
+		let list = [1, 2, 3, 2, 1, 2, 3, 2, 1, 3, 1, 2, 3, 2, 1, 2, 3, 2, 1, 3, 1, 2, 3, 2, 1, 2, 3, 2, 1, 3];
+		let mix = list[Math.floor(Math.random() * list.length)];
+
+		result = mix;
+
+		const intervalAnimation1 = setInterval(() => {
+			document.getElementById("botIMG").src = "/assets/rock.png";
+			document.getElementById("botIMG").style.zIndex = "1";
+		}, 200);
+		const intervalAnimation2 = setInterval(() => {
+			document.getElementById("botIMG").src = "/assets/paper.png";
+		}, 400);
+		const intervalAnimation3 = setInterval(() => {
+			document.getElementById("botIMG").src = "/assets/scissor.png";
+		}, 600);
+
+		setTimeout(() => {
+			clearInterval(intervalAnimation1);
+			clearInterval(intervalAnimation2);
+			clearInterval(intervalAnimation3);
+
+			if (mix === 1) {
+				document.getElementById("botIMG").src = "/assets/rock.png";
+				document.getElementById("botBOX").style.backgroundColor = "#ff9364";
+			} else if (mix === 2) {
+				document.getElementById("botIMG").src = "/assets/paper.png";
+				document.getElementById("botBOX").style.backgroundColor = "#aa7fc1";
+			} else if (mix === 3) {
+				document.getElementById("botIMG").src = "/assets/scissor.png";
+				document.getElementById("botBOX").style.backgroundColor = "#6f63ff";
+			}
+
+			displayResult();
+		}, 1200);
+	}
+
+	function displayResult() {
+		if (selected === result) {
+			document.getElementById("display").innerHTML =
+				"O resultado é um <span style='color: #6AB585;'>empate</span>";
+		} else if (selected === 1 && result === 3) {
+			document.getElementById("display").innerHTML =
+				"O <span style='color: #d97c0f;'>usuário</span> venceu!";
+		} else if (selected === 3 && result === 2) {
+			document.getElementById("display").innerHTML =
+				"O <span style='color: #d97c0f;'>usuário</span> venceu!";
+		} else if (selected === 2 && result === 1) {
+			document.getElementById("display").innerHTML =
+				"O <span style='color: #d97c0f;'>usuário</span> venceu!";
+		} else if (selected === 1 && result === 2) {
+			document.getElementById("display").innerHTML =
+				"O <span style='color: #d97c0f;'>bot</span> venceu!";
+		} else if (selected === 2 && result === 3) {
+			document.getElementById("display").innerHTML =
+				"O <span style='color: #d97c0f;'>bot</span> venceu!";
+		} else if (selected === 3 && result === 1) {
+			document.getElementById("display").innerHTML =
+				"O <span style='color: #d97c0f;'>bot</span> venceu!";
+		}
+	}
+</script>
+</body>
+
+</html>

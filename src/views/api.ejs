@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cipher API</title>
+        <link rel="stylesheet" href="/stylesheet/api.css" />
+    </head>
+    <body>
+        <header>
+            <h1>Documentação da API - Cipher</h1>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#planetas">API Planetas</a></li>
+                <!-- <li><a href="#endpoint-2"></a></li> -->
+            </ul>
+        </nav>
+
+        <main>
+            <section id="planetas">
+                <h2>API Planetas</h2>
+                <p>A API de Informações Planetárias é uma plataforma que fornece dados detalhados sobre os planetas do nosso Sistema Solar. Com ela, é possível acessar uma variedade de informações, incluindo características físicas, órbitas, composição e curiosidades interessantes sobre cada planeta. Essa API é uma ferramenta valiosa para entusiastas da astronomia, educadores e qualquer pessoa interessada em explorar o vasto universo que nos rodeia.</p>
+                <pre><code>GET https://henrilima.space/api/planets</code></pre>
+                <p><strong>Parâmetros:</strong></p>
+                <ul>
+                    <li>Sem parâmetros</li>
+                    <!-- <li>param2: descrição do parâmetro 2</li> -->
+                </ul>
+                <p><strong>Exemplo de Resposta:</strong></p>
+                <pre><code>"planets": [
+    {
+        "id": "0",
+        "name": "Sol",
+        "resume": "O Sol é a estrela no centro do Sistema Solar. É uma bola quase perfeita de plasma quente, aquecida até a incandescência por reações de fusão nuclear em seu núcleo, irradiando a energia principalmente como luz visível, luz ultravioleta e radiação infravermelha. É de longe a fonte de energia mais importante para a vida na Terra.",
+        "image": "https://henrilima.space/api/static/sun.png",
+        "searchTags": ["planeta", "sol", "estrela central"],
+        "features": {
+            "orbitalPeriod": ["0 dias", "0 anos"],
+            "orbitalSpeed": "0 km/h",
+            "rotationDuration": "25 dias, 9 horas e 7 minutos",
+            "radius": "696.340 km",
+            "Diameter": "1.392.700 km",
+            "sunDistance": "0 km",
+            "temperature": "5.505°C",
+            "composition": "Principalmente composto de hidrogênio (cerca de 74%) e hélio (cerca de 24%), com pequenas quantidades de outros elementos.",
+            "activity": "O Sol passa por ciclos de atividade solar, com períodos de máximo e mínimo solar, afetando a ocorrência de manchas solares e ejeções de massa coronal.",
+            "history": "Formou-se a partir de uma nuvem de gás e poeira há aproximadamente 4,6 bilhões de anos. Continuará a brilhar por bilhões de anos mais antes de entrar na fase de gigante vermelha e, finalmente, se transformar em uma anã branca.",
+            "influence": "Além de fornecer luz e calor para os planetas, o Sol exerce influência gravitacional sobre todo o Sistema Solar, mantendo os planetas em suas órbitas.",
+            "spaceMissions": [
+                "Sonda Parker Solar Probe",
+                "Observatório Solar e Heliosférico (SOHO)"
+            ],
+            "interestingFacts": [
+                "O Sol possui mais de 99% da massa de todo o Sistema Solar.",
+                "A luz que vemos do Sol leva aproximadamente 8 minutos e 20 segundos para chegar à Terra."
+            ]
+        }, {
+            ...
+        }
+]</code></pre>
+            </section>
+
+            <!-- <section id="endpoint-2">
+                <h2>Endpoint 2</h2>
+                <p>Descrição do endpoint 2.</p>
+                <pre><code>POST /api/endpoint-2</code></pre>
+                <p>Corpo da Solicitação:</p>
+                <pre><code>{ "param1": "valor1", "param2": "valor2" }</code></pre>
+                <p>Exemplo de Resposta:</p>
+                <pre><code>{ "message": "Mensagem de sucesso", "data": { ... } }</code></pre>
+            </section> -->
+
+            <!-- Adicione mais seções para outros endpoints -->
+        </main>
+    </body>
+</html>

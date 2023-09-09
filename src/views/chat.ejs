@@ -1,0 +1,446 @@
+<%- include('./partials/header') %>
+<style>
+	@import url(https://fonts.googleapis.com/css?family=Red+Hat+Display:300,regular,500,600,700,800,900,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
+	@font-face {
+		font-family: "Uni Sans";
+		src: url("/fonts/Uni.otf");
+	}
+
+	:root {
+		--primary: #ff9364;
+		--black: #101010;
+		--warn: #d97c0f;
+		--blue: #b1c4f6;
+		--white: #d9d9d9;
+		--glass: linear-gradient(45deg,
+				rgba(217, 217, 217, 0.05),
+				rgba(217, 217, 217, 0.25),
+				rgba(217, 217, 217, 0.05));
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	* {
+		transition: all 0.4s;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: "Red Hat Display";
+	}
+
+	body {
+		height: 100vh;
+		width: 100%;
+		font-weight: 500 !important;
+		background-color: #252525;
+		color: #f2f2f2;
+	}
+
+	body,
+	main {
+		overflow-x: hidden;
+	}
+
+	main {
+		height: calc(100% - 40px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	nav {
+		width: 100%;
+		height: 40px;
+		background-color: #404040;
+		padding: 0.5rem 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	nav h3 {
+		font-family: "Uni Sans", sans-serif;
+		margin: 0.4rem;
+	}
+
+	main div.messages {
+		width: 100%;
+		height: 100%;
+		background-color: #252525;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-end;
+	}
+
+	main div.messages section {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 1.6rem;
+	}
+
+	main div.messages input.box {
+		border-radius: 18px;
+		width: 75%;
+		height: 3rem;
+		background-color: #303030;
+		border: none;
+		outline: none;
+		padding: 1rem 2rem;
+		font-size: 1.2rem;
+		color: #dcddde;
+	}
+
+	main div.messages a.send-button {
+		font-size: 1.5rem;
+		width: 50px;
+		height: 50px;
+		border-radius: 100px;
+		background-color: #404040;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-left: 1rem;
+	}
+
+	main div.messages a.send-button:hover {
+		background-color: var(--primary);
+		cursor: pointer;
+	}
+
+	::placeholder {
+		color: rgba(220, 221, 222, 0.6);
+	}
+
+	main div.users {
+		width: 400px;
+		height: 100%;
+		background-color: #303030;
+		padding: 1.5rem 0 0 1.5rem;
+		overflow-y: scroll;
+	}
+
+	div.classe {
+		margin-bottom: 2rem;
+	}
+
+	div.classe.p1 {
+		color: #f1daa5;
+	}
+
+	div.classe.p2 {
+		color: #a0c9ef;
+	}
+
+	div.classe>p {
+		font-family: "Uni Sans", sans-serif;
+	}
+
+	div.user {
+		color: #dcddde;
+		margin-top: 0.4rem;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	div.user img {
+		width: 40px;
+		height: 40px;
+		border-radius: 100px;
+	}
+
+	span.datas {
+		font-size: 0.8rem;
+		font-weight: 400;
+		color: #a4a4a4;
+		margin-left: 0.5rem;
+	}
+
+	div.user p {
+		font-family: "Red Hat Display", sans-serif;
+		font-size: 1.2rem;
+		margin-left: 1rem;
+		text-transform: capitalize;
+	}
+
+	div.message-boxies {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		flex-direction: column;
+	}
+
+	div.warn {
+		margin-top: 2rem;
+		width: 80%;
+		height: auto;
+		padding: 1rem;
+		background-image: linear-gradient(45deg,
+				rgba(255, 255, 255, 0.05),
+				rgba(255, 255, 255, 0.15),
+				rgba(255, 255, 255, 0.05));
+		border-radius: 20px;
+		color: #d9d9d997;
+		display: flex;
+		flex-direction: column;
+	}
+
+	div.warn h3 {
+		font-family: "Uni Sans", sans-serif;
+	}
+
+	div.warn p {
+		margin-top: 0.5rem;
+	}
+
+	div.message-boxies ul {
+		height: calc(100% - 80px);
+		width: 100%;
+		padding: 2rem 8rem;
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		overflow-y: auto;
+        justify-content: flex-end;
+	}
+
+	::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+	}
+
+	div.message-boxies ul li {
+		margin-bottom: 1rem;
+	}
+
+	div.message-boxies ul li div {
+		display: flex;
+	}
+
+	div.message-boxies ul li div>img {
+		width: 40px;
+		height: 40px;
+		border-radius: 100px;
+		border: 2px solid var(--primary);
+	}
+
+	div.message-boxies ul li div>div {
+		color: #d9d9d9;
+		display: flex;
+		flex-direction: column;
+		margin-left: 1rem;
+	}
+
+	div.message-boxies ul li div>div p.username {
+		font-weight: 800;
+		font-size: 1.1rem;
+	}
+
+	div.message-boxies ul li div>div p.content {
+		font-size: 1.1rem;
+		font-weight: 400;
+		color: #d9d9d9d4;
+        max-width: 600px;
+        word-wrap: break-word;
+	}
+
+	@media screen and (max-width: 1000px) {
+		nav h3 {
+			font-size: 0.8rem;
+		}
+
+		main div.users {
+			display: none;
+		}
+
+		div.message-boxies ul {
+			padding: 2rem;
+		}
+
+		main div.messages input.box {
+			font-size: 0.8rem;
+		}
+
+		main div.messages a.send-button {
+			font-size: 1rem;
+		}
+
+        div.message-boxies ul li div>div p.content {
+        max-width: 250px !important;
+	}
+	}
+</style>
+
+<nav>
+	<h3>#bate-papo | Comunidade da Cipher</h3>
+</nav>
+<main>
+	<div class="messages">
+		<div class="message-boxies">
+			<ul id="list-message"></ul>
+		</div>
+		<section>
+			<input type="text" class="box" placeholder="Mensagem em #bate-papo" id="input-textbox" />
+			<a class="send-button" onclick="sendMessage();">📬</a>
+		</section>
+	</div>
+	<div class="users">
+		<div class="classe p1">
+			<p>Criador - 1</p>
+			<div class="user">
+				<img src="https://lh3.googleusercontent.com/a/AAcHTtcoNtFzSSqXRXUBSVPKOkt3zmxQBIV_kRhvLt5EM8kvCA=s96-c" />
+				<p>Henrique</p>
+			</div>
+		</div>
+		<div class="classe" id="list-users">
+			<p>Everyone</p>
+		</div>
+	</div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.9.1/firebase.js"></script>
+<script>
+	const inputTextbox = document.getElementById('input-textbox');
+
+	inputTextbox.addEventListener('keyup', function(event) {
+		if (event.keyCode === 13) { // Código da tecla Enter é 13
+			const valorInput = inputTextbox.value.trim();
+			if (valorInput !== '') {
+				sendMessage();
+			}
+		}
+	});
+
+	function salvarData() {
+		const dataAtual = new Date();
+		const horas = String(dataAtual.getHours()).padStart(2, '0');
+		const minutos = String(dataAtual.getMinutes()).padStart(2, '0');
+		const dia = String(dataAtual.getDate()).padStart(2, '0');
+		const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
+		const ano = dataAtual.getFullYear();
+
+		const dataHoraFormatada = `${dia}/${mes}/${ano} às ${horas}:${minutos}`;
+		return dataHoraFormatada;
+	}
+</script>
+<script>
+	const firebaseConfig = {
+		apiKey: "AIzaSyA2yUXLVQ9c9GJbP52epQosdmrPYriH-6c",
+		authDomain: "henrilima-website.firebaseapp.com",
+		databaseURL: "https://henrilima-website-default-rtdb.firebaseio.com",
+		projectId: "henrilima-website",
+		storageBucket: "henrilima-website.appspot.com",
+		messagingSenderId: "508755814738",
+		appId: "1:508755814738:web:ec03dbdf8f5f137538b28b"
+	};
+
+	firebase.initializeApp(firebaseConfig);
+
+	function eraseText() {
+		document.getElementsByClassName("output")[0].value = "";
+	}
+
+	function removerElementoPorID(id) {
+		const elemento = document.getElementById(id);
+		const paiDoElemento = elemento.parentNode;
+		paiDoElemento.removeChild(elemento);
+	}
+
+	function scrollToBot() {
+		var element = document.getElementById("list-message");
+		element.scrollTop = element.scrollHeight;
+	}
+
+	function sendMessage() {
+		if (document.getElementById("input-textbox").value === "") {
+			scrollToBot();
+			document.getElementsByClassName("send-button")[0].style =
+				"background-color: #d97c0f;";
+			setTimeout(
+				() =>
+				(document.getElementsByClassName("send-button")[0].style =
+					"background-color: #57567b;"),
+				500
+			);
+		} else {
+			let Message = document.getElementById("input-textbox").value ?
+				document.getElementById("input-textbox").value :
+				false;
+
+			firebase.database().ref("messages").push().set({
+				sender: "<%- user.username %>",
+				message: Message,
+				avatar: "<%- user.avatar %>",
+				tag: "<%- user.tag %>",
+				date: `${salvarData()}`
+			});
+
+			document.getElementById("input-textbox").value = "";
+
+			firebase
+				.database()
+				.ref("users")
+				.child(`${"<%- (user.tag) %>".replace("#", "-")}`)
+				.set({
+					username: "<%- (user.username) %>",
+					tag: Message,
+					avatar: "<%- user.avatar %>",
+				});
+		}
+	}
+
+	firebase
+		.database()
+		.ref("messages")
+		.on("child_added", function(snapshot) {
+			document.getElementById(
+				"list-message"
+			).innerHTML += `<li id="message${snapshot.key}"><div><img src="${
+                snapshot.val().avatar
+            }" /><div><p class="username">${snapshot.val().sender} <span class="datas">${snapshot.val().date ? snapshot.val().date : "Sem data"}</span> ${
+                `<%- user.tag %>` === `${snapshot.val().tag}`
+                    ? `<button id="button" data-id="${snapshot.key}" onclick="deletarMensagem(this)" style="cursor: pointer; background: none; margin-left: 0.5rem; border: none;">🗑️</button>`
+                    : ""
+            }</p><p class="content">${
+                snapshot.val().message
+            }</p></div></div></li>`;
+		});
+
+	firebase
+		.database()
+		.ref("users")
+		.on("child_added", function(snapshot) {
+			document.getElementById(
+				"list-users"
+			).innerHTML += `<div class="user">
+                <img src="${snapshot.val().avatar}" />
+                <p>${snapshot.val().username}</p>
+            </div>`;
+		});
+
+	function deletarMensagem(self) {
+		var messageID = self.getAttribute("data-id");
+
+		firebase.database().ref("messages").child(messageID).set({});
+	}
+
+	firebase
+		.database()
+		.ref("messages")
+		.on("child_removed", function(snapshot) {
+			removerElementoPorID(`message${snapshot.key}`);
+		});
+</script>
+</body>
+
+</html>

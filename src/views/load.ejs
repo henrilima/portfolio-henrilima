@@ -1,0 +1,93 @@
+<%- include('./partials/header') %>
+<style>
+	@import url(https://fonts.googleapis.com/css?family=Red+Hat+Display:300,regular,500,600,700,800,900,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		-webkit-transition: all 0.4s;
+		-o-transition: all 0.4s;
+		transition: all 0.4s;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		scroll-behavior: smooth;
+		font-family: "Red Hat Display", sans-serif;
+	}
+
+	body {
+		height: 100vh;
+		width: 100%;
+		overflow-x: hidden;
+		background-color: #252525;
+
+		display: -webkit-box;
+
+		display: -ms-flexbox;
+
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+		-webkit-box-pack: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+	}
+
+	div.loader {
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+    div.loader img {
+        max-height: 120px;
+        height: 120px;
+        width: auto;
+        animation: pulse 3s infinite ease;
+    }
+
+	.loader p {
+		font-weight: 800;
+		font-size: 1.4rem;
+		color: #d9d9d9;
+		margin-top: 2rem;
+	}
+
+	@keyframes pulse {
+		0% {
+			opacity: 0;
+		}
+        25% {
+            opacity: 1;
+        }
+		50% {
+			opacity: 0;
+		}
+        75% {
+            opacity: 1;
+        }
+	    100% {
+			opacity: 0;
+		}
+	}
+</style>
+
+<div class="loader">
+	<img src="/assets/logomarca.png" alt="Cipher" draggable="false">
+</div>
+
+<script>
+	setTimeout(function() {
+		window.location.href = "/projects/<%- rota %>";
+	}, 3000);
+</script>
+</body>
+
+</html>
